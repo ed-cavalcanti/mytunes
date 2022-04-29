@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
+// import Loading from '../components/Loading';
 
 export default class Album extends Component {
   state = {
@@ -30,26 +31,30 @@ export default class Album extends Component {
     return (
       <div data-testid="page-album">
         <Header />
-        <section>
-          <h3 data-testid="album-name">{ collection.collectionName }</h3>
-          <h4 data-testid="artist-name">{ collection.artistName }</h4>
-        </section>
-        <section>
-          {
-            musicList.map(({ trackName, previewUrl }, index) => {
-              if (index === 0) {
-                return <span key={ 0 }>TrackList:</span>;
-              }
-              return (
-                <MusicCard
-                  key={ index }
-                  trackName={ trackName }
-                  previewUrl={ previewUrl }
-                />
-              );
-            })
-          }
-        </section>
+        <div>
+          <section>
+            <h3 data-testid="album-name">{ collection.collectionName }</h3>
+            <h4 data-testid="artist-name">{ collection.artistName }</h4>
+          </section>
+          <section>
+            {
+              musicList.map((music, index) => {
+                if (index === 0) {
+                  return <span key={ 0 }>TrackList:</span>;
+                }
+                return (
+                  <MusicCard
+                    key={ index }
+                    trackName={ music.trackName }
+                    previewUrl={ music.previewUrl }
+                    trackId={ music.trackId }
+                    music={ music }
+                  />
+                );
+              })
+            }
+          </section>
+        </div>
       </div>
     );
   }
