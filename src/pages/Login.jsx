@@ -30,7 +30,7 @@ export default class Login extends Component {
   }
 
   LoginButtonClick = () => {
-    const waitTime = 1000;
+    const waitTime = 500;
     this.setState({ loading: true });
     const { loginInput } = this.state;
     createUser({ name: loginInput });
