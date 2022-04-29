@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
+import Loading from '../components/Loading';
 
 export default class Login extends Component {
   constructor() {
@@ -42,7 +43,7 @@ export default class Login extends Component {
     const { loginButton, loading, unloading } = this.state;
     return (
       <div data-testid="page-login">
-        { loading ? <h3>Carregando...</h3> : null }
+        { loading ? <Loading /> : null }
         { unloading ? <Redirect to="/search" /> : null }
         <form>
           <input
