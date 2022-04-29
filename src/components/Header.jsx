@@ -25,7 +25,8 @@ export default class Header extends Component {
             ? <Loading />
             : (
               <div>
-                <h3 data-testid="header-user-name">{`Olá, ${name.name}`}</h3>
+                <span>Olá, </span>
+                <span data-testid="header-user-name">{name.name}</span>
                 <ul>
                   <Link to="/search" data-testid="link-to-search">Pesquisar</Link>
                   <Link to="/favorites" data-testid="link-to-favorites">Favoritos</Link>
