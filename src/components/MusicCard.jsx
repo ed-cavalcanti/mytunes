@@ -1,26 +1,55 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 export default class MusicCard extends Component {
   state = {
+    musicasFavoritas: [],
+    favorita: false,
     checked: false,
     loading1: false,
   }
 
+  async componentDidMount() {
+    const musicasFavoritas = await getFavoriteSongs();
+    this.setState({
+      musicasFavoritas,
+      checked: false,
+    });
+    this.verifyFavorite();
+  }
+
+  check = () => {
+    const { favorita } = this.state;
+    if (favorita === true) {
+      this.setState({ checked: true });
+    }
+  }
+
+  verifyFavorite = () => {
+    const { musicasFavoritas } = this.state;
+    const { music } = this.props;
+    const ids = musicasFavoritas.map((musica) => musica.trackId);
+    const filter = ids.filter((id) => id === music.trackId);
+    if (filter.length !== 0) {
+      this.setState({ favorita: true });
+    }
+    this.check();
+  }
+
   saveMusic = async () => {
-    const { checked } = this.state;
-    if (checked === true) {
-      this.setState({ checked: false });
-    } else if (checked === false) {
+    const { favorita } = this.state;
+    const { music } = this.props;
+    if (favorita === false) {
       this.setState({
-        checked: true,
         loading1: true,
+        checked: true,
       });
-      await addSong();
+      await addSong(music);
       this.setState({ loading1: false });
     }
+    this.verifyFavorite();
   }
 
   render() {
@@ -63,4 +92,5 @@ MusicCard.propTypes = {
   trackName: propTypes.string.isRequired,
   previewUrl: propTypes.string.isRequired,
   trackId: propTypes.number.isRequired,
+  music: propTypes.instanceOf(Object).isRequired,
 };
