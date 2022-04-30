@@ -29,17 +29,18 @@ export default class MusicCard extends Component {
   }
 
   async saveOrDeleteMusic() {
-    const { music } = this.props;
+    const { music, apiRequest } = this.props;
     const { musicaFavotira } = this.state;
 
     if (musicaFavotira) {
       await removeSong(music);
-      console.log('removeu');
     } else {
       await addSong(music);
-      console.log('adicionou');
     }
     this.setState({ loading: false });
+    if (apiRequest) {
+      await apiRequest();
+    }
   }
 
   render() {
@@ -84,4 +85,9 @@ MusicCard.propTypes = {
   trackId: propTypes.number.isRequired,
   favoriteSongs: propTypes.instanceOf(Object).isRequired,
   music: propTypes.instanceOf(Object).isRequired,
+  apiRequest: propTypes.func,
+};
+
+MusicCard.defaultProps = {
+  apiRequest: null,
 };
