@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
-import Loading from './Loading';
 import './Header.css';
 
 export default class Header extends Component {
@@ -23,7 +22,7 @@ export default class Header extends Component {
       <header data-testid="header-component">
         {
           loading
-            ? <Loading />
+            ? null
             : (
               <div className="header-content">
                 <div>

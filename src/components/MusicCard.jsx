@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
-import Loading from './Loading';
+import './MusicCard.css';
 
 export default class MusicCard extends Component {
   state = {
@@ -50,9 +50,9 @@ export default class MusicCard extends Component {
       <div>
         {
           loading
-            ? <Loading />
+            ? <p className="loading-text">Carregando...</p>
             : (
-              <div>
+              <div className="track-wrapper">
                 <span>{ trackName }</span>
                 <audio data-testid="audio-component" src={ previewUrl } controls>
                   <track
@@ -62,7 +62,7 @@ export default class MusicCard extends Component {
                   <code>audio</code>
                 </audio>
                 <label htmlFor="favorita">
-                  Favorita
+                  Adicionar as favoritas
                   <input
                     data-testid={ `checkbox-music-${trackId}` }
                     type="checkbox"
