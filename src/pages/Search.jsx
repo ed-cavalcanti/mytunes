@@ -3,6 +3,7 @@ import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import AlbumCard from '../components/AlbumCard';
+import './Search.css';
 
 export default class Search extends Component {
   state = {
@@ -50,16 +51,18 @@ export default class Search extends Component {
     return (
       <div data-testid="page-search">
         <Header />
-        <form hidden={ hidden }>
+        <form className="search-form" hidden={ hidden }>
           <input
+            className="search-input"
             name="inputValue"
             value={ inputValue }
             type="text"
             data-testid="search-artist-input"
             onChange={ this.handleChange }
-            placeholder="Nome do artista"
+            placeholder="Busque álbuns pelo nome do artista"
           />
           <button
+            className="search-button"
             type="button"
             data-testid="search-artist-button"
             disabled={ loginButton }
@@ -71,11 +74,19 @@ export default class Search extends Component {
         { loading ? <Loading /> : null }
         {
           data.length === 0
-            ? <h3>Nenhum álbum foi encontrado</h3>
+            ? <h3 className="main-title">Nenhum álbum foi encontrado</h3>
             : (
               <div>
-                <h3>{ `Resultado de álbuns de: ${artistName}` }</h3>
-                { data.map((album, i) => <AlbumCard key={ i } info={ album } />) }
+                <h3
+                  className="main-title"
+                >
+                  { `Resultado de álbuns de: ${artistName}` }
+                </h3>
+                <div className="cards-container">
+                  {
+                    data.map((album, i) => <AlbumCard key={ i } info={ album } />)
+                  }
+                </div>
               </div>
             )
         }
