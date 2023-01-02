@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { createUser } from '../services/userAPI';
-import Loading from '../components/Loading';
+import './Login.css';
 
 export default class Login extends Component {
   constructor() {
@@ -9,8 +9,7 @@ export default class Login extends Component {
     this.state = {
       loginInput: '',
       loginButton: true,
-      loading: false,
-      unloading: false,
+      redirect: false,
     };
   }
 
@@ -30,21 +29,21 @@ export default class Login extends Component {
   }
 
   LoginButtonClick = () => {
-    const waitTime = 500;
-    this.setState({ loading: true });
     const { loginInput } = this.state;
     createUser({ name: loginInput });
-    setTimeout(() => {
-      this.setState({ unloading: true });
-    }, waitTime);
+    this.setState({ redirect: true });
   }
 
   render() {
-    const { loginButton, loading, unloading } = this.state;
+    const { loginButton, redirect } = this.state;
     return (
-      <div data-testid="page-login">
-        { loading ? <Loading /> : null }
-        { unloading ? <Redirect to="/search" /> : null }
+      <div data-testid="page-login" className="container">
+        { redirect ? <Redirect to="/search" /> : null }
+        <h1 className="title">
+          &#127925;
+          My Tunes
+        </h1>
+        <p>Digite seu nome de usuário para começarmos</p>
         <form>
           <input
             name="loginInput"
