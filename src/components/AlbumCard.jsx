@@ -21,6 +21,7 @@ export default class AlbumCard extends Component {
         <h5>{ collectionName }</h5>
         <span>{ artistName }</span>
         <Link
+          className="see-more"
           to={ `/album/${collectionId}` }
           data-testid={ `link-to-album-${collectionId}` }
         >
