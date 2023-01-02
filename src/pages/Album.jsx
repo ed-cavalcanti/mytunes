@@ -4,7 +4,7 @@ import getMusics from '../services/musicsAPI';
 import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
-// import Loading from '../components/Loading';
+import './Album.css';
 
 export default class Album extends Component {
   state = {
@@ -28,6 +28,7 @@ export default class Album extends Component {
       collection: data[0],
       favoriteSongs: favoritos,
     });
+    console.log(data[0]);
   }
 
   render() {
@@ -36,15 +37,25 @@ export default class Album extends Component {
       <div data-testid="page-album">
         <Header />
         <div>
-          <section>
-            <h3 data-testid="album-name">{ collection.collectionName }</h3>
-            <h4 data-testid="artist-name">{ collection.artistName }</h4>
+          <section className="album-header">
+            <div>
+              <h3 data-testid="album-name">{ collection.collectionName }</h3>
+              <h4 data-testid="artist-name">{ collection.artistName }</h4>
+            </div>
+            <img
+              className="album-image"
+              src={ collection.artworkUrl100 }
+              alt={
+                `Capa do álbum ${collection.collectionName} do
+                artista ${collection.artistName}`
+              }
+            />
           </section>
-          <section>
+          <section className="track-container">
             {
               musicList.map((music, index) => {
                 if (index === 0) {
-                  return <span key={ 0 }>TrackList:</span>;
+                  return null;
                 }
                 return (
                   <MusicCard
