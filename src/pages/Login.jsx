@@ -43,15 +43,17 @@ export default class Login extends Component {
           &#127925;
           My Tunes
         </h1>
-        <p>Digite seu nome de usuário para começarmos</p>
-        <form>
+        <p className="message">Digite seu nome de usuário para começarmos</p>
+        <form className="login-form">
           <input
+            className="name-input"
             name="loginInput"
             type="text"
             data-testid="login-name-input"
             onChange={ this.handleChange }
           />
           <button
+            className="login-button"
             type="button"
             data-testid="login-submit-button"
             disabled={ loginButton }

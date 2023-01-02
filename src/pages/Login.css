@@ -1,5 +1,5 @@
 body {
-  background-color: var(--secondary-color);
+  background-color: var(--backgorund-color);
 }
 
 .container {
@@ -22,25 +22,25 @@ body {
   color: var(--headline-color);
 }
 
-p {
+.message {
   color: var(--paragraph-color);
   margin-bottom: 4rem;
 }
 
-form {
+.login-form {
   align-items: center;
   display: flex;
   flex-direction: column;
   width: 200px;
 }
 
-input {
+.name-input {
   border: 2px solid var(--paragraph-color);
   border-radius: 8px;
   height: 30px;
 }
 
-button {
+.login-button {
   background-color: var(--button-color);
   border: none;
   border-radius: 8px;
@@ -51,12 +51,12 @@ button {
   width: 80px;
 }
 
-button:hover {
+.login-button:hover {
   box-shadow: 7px 8px 15px -3px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
-button:disabled {
+.login-button:disabled {
   background-color: var(--paragraph-color);
   border: none;
   box-shadow: none;
