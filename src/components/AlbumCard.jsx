@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './AlbumCard.css';
 
 export default class AlbumCard extends Component {
   render() {
@@ -12,7 +13,7 @@ export default class AlbumCard extends Component {
       artworkUrl100,
     } = info;
     return (
-      <div className="music-card">
+      <div className="album-card">
         <img
           src={ artworkUrl100 }
           alt={ `Imagem da capa do álbum ${collectionName} do(a) artista ${artistName}` }
